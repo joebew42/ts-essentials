@@ -1,3 +1,5 @@
+import Transaction from "./transaction";
+
 type AccountId = string;
 type DepositAmount = number;
 type WithdrawAmount = number;
@@ -12,19 +14,19 @@ type Bank = {
   printStatement: PrintStatementFunction;
 };
 
-function bank(accounts: Map<string, number>): Bank {
+function bank(accounts: Map<string, Transaction>): Bank {
   return {
     deposit: function (accountId: AccountId, amount: DepositAmount): void {
-      const balance = accounts.get(accountId) || 0;
-      accounts.set(accountId, balance + amount);
+      const { amount: balance } = accounts.get(accountId) || { amount: 0 };
+      accounts.set(accountId, { amount: balance + amount });
     },
     withdraw: function (accountId: AccountId, amount: WithdrawAmount): void {
-      const balance = accounts.get(accountId) || 0;
-      accounts.set(accountId, balance - amount);
+      const { amount: balance } = accounts.get(accountId) || { amount: 0 };
+      accounts.set(accountId, { amount: balance - amount });
     },
     printStatement: function (accountId: AccountId): void {
       console.log(
-        `Bank Statement for ${accountId}: ${accounts.get(accountId)}`
+        `Bank Statement for ${accountId}: ${accounts.get(accountId).amount}`
       );
     },
   };
