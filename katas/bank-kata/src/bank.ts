@@ -15,15 +15,17 @@ type Bank = {
 function bank(accounts: Map<string, number>): Bank {
   return {
     deposit: function (accountId: AccountId, amount: DepositAmount): void {
-      const balance = accounts.get(accountId);
+      const balance = accounts.get(accountId) || 0;
       accounts.set(accountId, balance + amount);
     },
     withdraw: function (accountId: AccountId, amount: WithdrawAmount): void {
-      const balance = accounts.get(accountId);
+      const balance = accounts.get(accountId) || 0;
       accounts.set(accountId, balance - amount);
     },
     printStatement: function (accountId: AccountId): void {
-      console.log(`Bank Statement for ${accountId}`);
+      console.log(
+        `Bank Statement for ${accountId}: ${accounts.get(accountId)}`
+      );
     },
   };
 }
