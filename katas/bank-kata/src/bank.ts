@@ -18,11 +18,11 @@ function bank(accounts: Map<string, Transaction[]>): Bank {
   return {
     deposit: function (accountId: AccountId, amount: DepositAmount): void {
       const transactions = accounts.get(accountId) || [];
-      accounts.set(accountId, [...transactions, { amount }]);
+      accounts.set(accountId, [...transactions, { amount }]); // Introduce the DepositTransaction type
     },
     withdraw: function (accountId: AccountId, amount: WithdrawAmount): void {
       const transactions = accounts.get(accountId) || [];
-      accounts.set(accountId, [...transactions, { amount: -1 * amount }]);
+      accounts.set(accountId, [...transactions, { amount: -1 * amount }]); // Introduce the WithdrawalTransaction type
     },
     printStatement: function (accountId: AccountId): void {
       const transactions = accounts.get(accountId) || [];
