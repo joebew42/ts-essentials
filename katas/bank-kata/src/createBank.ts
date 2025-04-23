@@ -12,9 +12,7 @@ type Bank = {
   printStatement: PrintStatementFunction;
 };
 
-function createBank(): Bank {
-  const accounts = new Map<string, number>();
-
+function bank(accounts: Map<string, number>): Bank {
   return {
     deposit: function (accountId: AccountId, amount: DepositAmount): void {
       const balance = accounts.get(accountId);
@@ -28,6 +26,12 @@ function createBank(): Bank {
       console.log("Hello world");
     },
   };
+}
+
+function createBank(): Bank {
+  const accounts = new Map<string, number>();
+
+  return bank(accounts);
 }
 
 export default createBank;
