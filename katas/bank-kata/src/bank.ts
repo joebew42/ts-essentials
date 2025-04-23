@@ -4,7 +4,7 @@ type WithdrawAmount = number;
 
 type DepositFunction = (accountId: AccountId, amount: DepositAmount) => void;
 type WithdrawFunction = (accountId: AccountId, amount: WithdrawAmount) => void;
-type PrintStatementFunction = () => void;
+type PrintStatementFunction = (accountId: AccountId) => void;
 
 type Bank = {
   deposit: DepositFunction;
@@ -22,8 +22,8 @@ function bank(accounts: Map<string, number>): Bank {
       const balance = accounts.get(accountId);
       accounts.set(accountId, balance - amount);
     },
-    printStatement: function (): void {
-      console.log("Hello world");
+    printStatement: function (accountId: AccountId): void {
+      console.log(`Bank Statement for ${accountId}`);
     },
   };
 }

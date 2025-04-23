@@ -27,8 +27,8 @@ describe("Deposit, Withdrawal and bank statement", () => {
     bank.withdraw(anAccountId, 5);
     bank.withdraw(anAccountId, 2);
 
-    bank.printStatement();
+    bank.printStatement(anAccountId);
 
-    expect(consoleOutput).toContain("Hello world");
+    expect(consoleOutput).toContain("Bank Statement for joe-account-id");
   });
 });
