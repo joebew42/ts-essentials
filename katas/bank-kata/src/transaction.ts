@@ -15,4 +15,4 @@ type WithdrawalTransaction = {
 
 type Transaction = DepositTransaction | WithdrawalTransaction;
 
-export { Transaction, TransactionType };
+export { Transaction, TransactionType }; // TODO: TransactionType should not leak?
