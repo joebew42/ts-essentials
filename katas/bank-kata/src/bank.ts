@@ -18,7 +18,7 @@ function bank(accounts: Map<string, Transaction[]>): Bank {
   return {
     deposit: function (accountId: AccountId, amount: DepositAmount): void {
       const transactions = accounts.get(accountId) || [];
-      const depositTransaction = { type: TransactionType.Deposit, amount };
+      const depositTransaction = { type: TransactionType.Deposit, amount }; // TODO: Add smart constructor?
       accounts.set(accountId, [...transactions, depositTransaction]);
     },
     withdraw: function (accountId: AccountId, amount: WithdrawAmount): void {
@@ -26,7 +26,7 @@ function bank(accounts: Map<string, Transaction[]>): Bank {
       const withdrawalTransaction = {
         type: TransactionType.Withdrawal,
         amount,
-      };
+      }; // TODO: Add smart constructor?
       accounts.set(accountId, [...transactions, withdrawalTransaction]);
     },
     printStatement: function (accountId: AccountId): void {
