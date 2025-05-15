@@ -16,6 +16,7 @@ type Bank = {
 
 function bank(accounts: Map<string, Transaction[]>): Bank {
   return {
+    // TODO: Extract Use Cases (or Application Services)
     deposit: function (accountId: AccountId, amount: DepositAmount): void {
       const transactions = accounts.get(accountId) || [];
       const depositTransaction = { type: TransactionType.Deposit, amount }; // TODO: Add smart constructor?
