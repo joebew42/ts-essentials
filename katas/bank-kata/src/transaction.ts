@@ -6,13 +6,34 @@ enum TransactionType {
 type DepositTransaction = {
   type: TransactionType.Deposit;
   amount: number;
-};
+} & { readonly __brand: unique symbol };
 
 type WithdrawalTransaction = {
   type: TransactionType.Withdrawal;
   amount: number;
-};
+} & { readonly __brand: unique symbol };
 
 type Transaction = DepositTransaction | WithdrawalTransaction;
 
-export { Transaction, TransactionType }; // TODO: TransactionType should not leak?
+function createDepositTransaction(amount: number): DepositTransaction {
+  // TODO: Add validation on amount
+  return {
+    type: TransactionType.Deposit,
+    amount,
+  } as DepositTransaction;
+}
+
+function createWithdrawalTransaction(amount: number): WithdrawalTransaction {
+  // TODO: Add validation on amount
+  return {
+    type: TransactionType.Withdrawal,
+    amount,
+  } as WithdrawalTransaction;
+}
+
+export {
+  Transaction,
+  TransactionType,
+  createDepositTransaction,
+  createWithdrawalTransaction,
+};
