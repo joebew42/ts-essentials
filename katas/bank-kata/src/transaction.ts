@@ -16,7 +16,11 @@ type WithdrawalTransaction = {
 type Transaction = DepositTransaction | WithdrawalTransaction;
 
 function createDepositTransaction(amount: number): DepositTransaction {
-  // TODO: Add validation on amount
+  // TODO: Extract a `TransactionAmount` type ?
+  if (amount < 1) {
+    throw new Error("Amount cannot be negative");
+  }
+
   return {
     type: TransactionType.Deposit,
     amount,
@@ -24,7 +28,11 @@ function createDepositTransaction(amount: number): DepositTransaction {
 }
 
 function createWithdrawalTransaction(amount: number): WithdrawalTransaction {
-  // TODO: Add validation on amount
+  // TODO: Extract a `TransactionAmount` type ?
+  if (amount < 1) {
+    throw new Error("Amount cannot be negative");
+  }
+
   return {
     type: TransactionType.Withdrawal,
     amount,
