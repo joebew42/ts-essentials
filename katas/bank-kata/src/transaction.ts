@@ -3,39 +3,43 @@ enum TransactionType {
   Withdrawal = "withdrawal",
 }
 
+type TransactionAmount = {
+  value: number;
+} & { readonly __brand: unique symbol };
+
 type DepositTransaction = {
   type: TransactionType.Deposit;
-  amount: number;
+  amount: TransactionAmount;
 } & { readonly __brand: unique symbol };
 
 type WithdrawalTransaction = {
   type: TransactionType.Withdrawal;
-  amount: number;
+  amount: TransactionAmount;
 } & { readonly __brand: unique symbol };
 
 type Transaction = DepositTransaction | WithdrawalTransaction;
 
-function createDepositTransaction(amount: number): DepositTransaction {
-  // TODO: Extract a `TransactionAmount` type ?
+function transactionAmountOf(amount: number): TransactionAmount {
   if (amount < 1) {
     throw new Error("Amount cannot be negative");
   }
 
   return {
+    value: amount,
+  } as TransactionAmount;
+}
+
+function createDepositTransaction(amount: number): DepositTransaction {
+  return {
     type: TransactionType.Deposit,
-    amount,
+    amount: transactionAmountOf(amount),
   } as DepositTransaction;
 }
 
 function createWithdrawalTransaction(amount: number): WithdrawalTransaction {
-  // TODO: Extract a `TransactionAmount` type ?
-  if (amount < 1) {
-    throw new Error("Amount cannot be negative");
-  }
-
   return {
     type: TransactionType.Withdrawal,
-    amount,
+    amount: transactionAmountOf(amount),
   } as WithdrawalTransaction;
 }
 

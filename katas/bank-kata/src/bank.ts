@@ -37,8 +37,8 @@ function bank(accounts: Map<string, Transaction[]>): Bank {
       const accountTotalAmount = transactions.reduce(
         (acc, curr) =>
           curr.type === TransactionType.Deposit
-            ? acc + curr.amount
-            : acc - curr.amount,
+            ? acc + curr.amount.value
+            : acc - curr.amount.value,
         0
       );
 
