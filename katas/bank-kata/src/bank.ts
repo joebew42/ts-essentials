@@ -19,6 +19,7 @@ type Bank = {
   printStatement: PrintStatementFunction;
 };
 
+// TODO: Rename it to Use Case? or ?
 function buildDepositFunction(
   accounts: Map<string, Transaction[]>
 ): DepositFunction {
@@ -29,6 +30,7 @@ function buildDepositFunction(
   };
 }
 
+// TODO: Rename it to Use Case? or ?
 function buildWithdrawFunction(
   accounts: Map<string, Transaction[]>
 ): WithdrawFunction {
@@ -39,6 +41,7 @@ function buildWithdrawFunction(
   };
 }
 
+// TODO: Rename it to Use Case? or ?
 function buildPrintStatementFunction(
   accounts: Map<string, Transaction[]>
 ): PrintStatementFunction {
