@@ -24,8 +24,9 @@ function buildDepositFunction(
   accounts: Map<string, Transaction[]>
 ): DepositFunction {
   return function (accountId: AccountId, amount: DepositAmount) {
-    const transactions = accounts.get(accountId) || [];
     const depositTransaction = createDepositTransaction(amount);
+
+    const transactions = accounts.get(accountId) || [];
     accounts.set(accountId, [...transactions, depositTransaction]);
   };
 }
@@ -35,8 +36,9 @@ function buildWithdrawFunction(
   accounts: Map<string, Transaction[]>
 ): WithdrawFunction {
   return function (accountId: AccountId, amount: WithdrawAmount): void {
-    const transactions = accounts.get(accountId) || [];
     const withdrawalTransaction = createWithdrawalTransaction(amount);
+
+    const transactions = accounts.get(accountId) || [];
     accounts.set(accountId, [...transactions, withdrawalTransaction]);
   };
 }
