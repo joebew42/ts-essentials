@@ -1,20 +1,23 @@
 import {
-  bank,
-  Bank,
+  BankClient,
   buildDepositFunction,
   buildPrintStatementFunction,
   buildWithdrawFunction,
-} from "./bank";
+} from "./bankClient";
 
 import { Transaction } from "./transaction";
 
-function createBank(): Bank {
+function createBankClient(): BankClient {
   const accounts = new Map<string, Transaction[]>();
   const depositFunction = buildDepositFunction(accounts);
   const withdrawFunction = buildWithdrawFunction(accounts);
   const printStatementFunction = buildPrintStatementFunction(accounts);
 
-  return bank(depositFunction, withdrawFunction, printStatementFunction);
+  return {
+    deposit: depositFunction,
+    withdraw: withdrawFunction,
+    printStatement: printStatementFunction,
+  };
 }
 
-export default createBank;
+export default createBankClient;

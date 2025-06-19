@@ -13,7 +13,7 @@ type DepositFunction = (accountId: AccountId, amount: DepositAmount) => void;
 type WithdrawFunction = (accountId: AccountId, amount: WithdrawAmount) => void;
 type PrintStatementFunction = (accountId: AccountId) => void;
 
-type Bank = {
+type BankClient = {
   deposit: DepositFunction;
   withdraw: WithdrawFunction;
   printStatement: PrintStatementFunction;
@@ -61,21 +61,8 @@ function buildPrintStatementFunction(
   };
 }
 
-function bank(
-  depositFunction: DepositFunction,
-  withdrawFunction: WithdrawFunction,
-  printStatementFunction: PrintStatementFunction
-): Bank {
-  return {
-    deposit: depositFunction,
-    withdraw: withdrawFunction,
-    printStatement: printStatementFunction,
-  };
-}
-
 export {
-  bank,
-  Bank,
+  BankClient,
   buildDepositFunction,
   buildWithdrawFunction,
   buildPrintStatementFunction,
