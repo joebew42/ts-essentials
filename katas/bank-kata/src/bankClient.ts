@@ -27,7 +27,6 @@ type BankClient = {
   printStatement: PrintStatementForAccount;
 };
 
-// TODO: Rename it to Use Case? or ?
 function createDepositAmountToAccount(
   accounts: Map<string, Transaction[]>
 ): DepositAmountToAccount {
@@ -39,7 +38,6 @@ function createDepositAmountToAccount(
   };
 }
 
-// TODO: Rename it to Use Case? or ?
 function createWithdrawAmountFromAccount(
   accounts: Map<string, Transaction[]>
 ): WithdrawAmountFrom {
@@ -51,7 +49,6 @@ function createWithdrawAmountFromAccount(
   };
 }
 
-// TODO: Rename it to Use Case? or ?
 function createPrintStatementForAccount(
   accounts: Map<string, Transaction[]>
 ): PrintStatementForAccount {
