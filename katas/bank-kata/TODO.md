@@ -1,0 +1,1 @@
+- Replace `accounts: Map<string, Transaction[]>` with a proper type `AccountTransactions` ?
