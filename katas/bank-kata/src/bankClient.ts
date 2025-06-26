@@ -9,20 +9,28 @@ type AccountId = string;
 type DepositAmount = number;
 type WithdrawAmount = number;
 
-type DepositFunction = (accountId: AccountId, amount: DepositAmount) => void;
-type WithdrawFunction = (accountId: AccountId, amount: WithdrawAmount) => void;
-type PrintStatementFunction = (accountId: AccountId) => void;
+type DepositAmountToAccount = (
+  accountId: AccountId,
+  amount: DepositAmount
+) => void;
+
+type WithdrawAmountFrom = (
+  accountId: AccountId,
+  amount: WithdrawAmount
+) => void;
+
+type PrintStatementForAccount = (accountId: AccountId) => void;
 
 type BankClient = {
-  deposit: DepositFunction;
-  withdraw: WithdrawFunction;
-  printStatement: PrintStatementFunction;
+  deposit: DepositAmountToAccount;
+  withdraw: WithdrawAmountFrom;
+  printStatement: PrintStatementForAccount;
 };
 
 // TODO: Rename it to Use Case? or ?
-function buildDepositFunction(
+function createDepositAmountToAccount(
   accounts: Map<string, Transaction[]>
-): DepositFunction {
+): DepositAmountToAccount {
   return function (accountId: AccountId, amount: DepositAmount) {
     const depositTransaction = createDepositTransaction(amount);
 
@@ -32,9 +40,9 @@ function buildDepositFunction(
 }
 
 // TODO: Rename it to Use Case? or ?
-function buildWithdrawFunction(
+function createWithdrawAmountFromAccount(
   accounts: Map<string, Transaction[]>
-): WithdrawFunction {
+): WithdrawAmountFrom {
   return function (accountId: AccountId, amount: WithdrawAmount): void {
     const withdrawalTransaction = createWithdrawalTransaction(amount);
 
@@ -44,9 +52,9 @@ function buildWithdrawFunction(
 }
 
 // TODO: Rename it to Use Case? or ?
-function buildPrintStatementFunction(
+function createPrintStatementForAccount(
   accounts: Map<string, Transaction[]>
-): PrintStatementFunction {
+): PrintStatementForAccount {
   return function (accountId: AccountId): void {
     const transactions = accounts.get(accountId) || [];
     const accountTotalAmount = transactions.reduce(
@@ -63,7 +71,7 @@ function buildPrintStatementFunction(
 
 export {
   BankClient,
-  buildDepositFunction,
-  buildWithdrawFunction,
-  buildPrintStatementFunction,
+  createDepositAmountToAccount,
+  createWithdrawAmountFromAccount,
+  createPrintStatementForAccount,
 };
