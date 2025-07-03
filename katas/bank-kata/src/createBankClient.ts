@@ -1,5 +1,6 @@
 import {
   BankClient,
+  createAppendTransactionTo,
   createDepositAmountToAccount,
   createPrintStatementForAccount,
   createWithdrawAmountFromAccount,
@@ -9,7 +10,9 @@ import { Transaction } from "./transaction";
 
 function createBankClient(): BankClient {
   const accounts = new Map<string, Transaction[]>();
-  const depositFunction = createDepositAmountToAccount(accounts);
+  const appendTransactionTo = createAppendTransactionTo(accounts);
+
+  const depositFunction = createDepositAmountToAccount(appendTransactionTo);
   const withdrawFunction = createWithdrawAmountFromAccount(accounts);
   const printStatementFunction = createPrintStatementForAccount(accounts);
 

@@ -27,14 +27,27 @@ type BankClient = {
   printStatement: PrintStatementForAccount;
 };
 
-function createDepositAmountToAccount(
+type AppendTransactionTo = (
+  accountId: AccountId,
+  transaction: Transaction
+) => void;
+
+function createAppendTransactionTo(
   accounts: Map<string, Transaction[]>
+): AppendTransactionTo {
+  return function (accountId: AccountId, transaction: Transaction) {
+    const transactions = accounts.get(accountId) || [];
+    const updatedTransactions = [...transactions, transaction];
+    accounts.set(accountId, updatedTransactions);
+  };
+}
+
+function createDepositAmountToAccount(
+  appendTransactionTo: AppendTransactionTo
 ): DepositAmountToAccount {
   return function (accountId: AccountId, amount: DepositAmount) {
     const depositTransaction = createDepositTransaction(amount);
-
-    const transactions = accounts.get(accountId) || [];
-    accounts.set(accountId, [...transactions, depositTransaction]);
+    appendTransactionTo(accountId, depositTransaction);
   };
 }
 
@@ -68,6 +81,7 @@ function createPrintStatementForAccount(
 
 export {
   BankClient,
+  createAppendTransactionTo,
   createDepositAmountToAccount,
   createWithdrawAmountFromAccount,
   createPrintStatementForAccount,
