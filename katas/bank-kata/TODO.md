@@ -1,1 +1,2 @@
-- Replace `accounts: Map<string, Transaction[]>` with a proper type `AccountTransactions` ?
+- [-] Replace `accounts: Map<string, Transaction[]>` with a proper type `AccountTransactions` ?
+  - [ ] Use `appendTransactionTo` in `createWithdrawAmountFromAccount`
